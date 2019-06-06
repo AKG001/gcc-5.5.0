@@ -1737,6 +1737,9 @@ extern machine_mode element_mode (const_tree t);
 /* Nonzero in a type considered atomic as a whole.  */
 #define TYPE_ATOMIC(NODE) (TYPE_CHECK (NODE)->base.u.bits.atomic_flag)
 
+/* Nonzero in a type considered dependent ptr as a whole.  */
+#define TYPE_DEPENDENT_PTR(NODE) (TYPE_CHECK (NODE)->base.u.bits.dependent_ptr_flag)
+
 /* Means this type is const-qualified.  */
 #define TYPE_READONLY(NODE) (TYPE_CHECK (NODE)->base.readonly_flag)
 
@@ -1767,6 +1770,7 @@ extern machine_mode element_mode (const_tree t);
   ((int) ((TYPE_READONLY (NODE) * TYPE_QUAL_CONST)		\
 	  | (TYPE_VOLATILE (NODE) * TYPE_QUAL_VOLATILE)		\
 	  | (TYPE_ATOMIC (NODE) * TYPE_QUAL_ATOMIC)		\
+    | (TYPE_DEPENDENT_PTR (NODE) * TYPE_QUAL_DEPENDENT_PTR) /* Added by me */   \  
 	  | (TYPE_RESTRICT (NODE) * TYPE_QUAL_RESTRICT)		\
 	  | (ENCODE_QUAL_ADDR_SPACE (TYPE_ADDR_SPACE (NODE)))))
 
@@ -1775,6 +1779,7 @@ extern machine_mode element_mode (const_tree t);
   ((int) ((TYPE_READONLY (NODE) * TYPE_QUAL_CONST)		\
 	  | (TYPE_VOLATILE (NODE) * TYPE_QUAL_VOLATILE)		\
 	  | (TYPE_ATOMIC (NODE) * TYPE_QUAL_ATOMIC)		\
+    | (TYPE_DEPENDENT_PTR (NODE) * TYPE_QUAL_DEPENDENT_PTR) /* Added by me */  \ 
 	  | (TYPE_RESTRICT (NODE) * TYPE_QUAL_RESTRICT)))
 
 /* The same as TYPE_QUALS without the address space and atomic 
@@ -3405,6 +3410,8 @@ tree_operand_check_code (const_tree __t, enum tree_code __code, int __i,
 #define atomicSI_type_node	global_trees[TI_ATOMICSI_TYPE]
 #define atomicDI_type_node	global_trees[TI_ATOMICDI_TYPE]
 #define atomicTI_type_node	global_trees[TI_ATOMICTI_TYPE]
+
+#define dependent_ptr_type_node global_trees[TI_DEPENDENT_PTR_TYPE]
 
 #define uint16_type_node		global_trees[TI_UINT16_TYPE]
 #define uint32_type_node		global_trees[TI_UINT32_TYPE]

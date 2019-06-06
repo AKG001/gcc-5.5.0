@@ -437,6 +437,7 @@ const struct c_common_resword c_common_reswords[] =
   { "_Alignas",		RID_ALIGNAS,   D_CONLY },
   { "_Alignof",		RID_ALIGNOF,   D_CONLY },
   { "_Atomic",		RID_ATOMIC,    D_CONLY },
+  { "_Dependent_ptr",    RID_DEPENDENT_PTR,    D_CONLY | D_CXXONLY },
   { "_Bool",		RID_BOOL,      D_CONLY },
   { "_Complex",		RID_COMPLEX,	0 },
   { "_Cilk_spawn",      RID_CILK_SPAWN, 0 },

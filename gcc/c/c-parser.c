@@ -531,6 +531,7 @@ c_token_starts_typename (c_token *token)
 	case RID_TYPEOF:
 	case RID_CONST:
 	case RID_ATOMIC:
+  case RID_DEPENDENT_PTR:
 	case RID_VOLATILE:
 	case RID_RESTRICT:
 	case RID_ATTRIBUTE:
@@ -619,6 +620,7 @@ c_token_is_qualifier (c_token *token)
 	case RID_RESTRICT:
 	case RID_ATTRIBUTE:
 	case RID_ATOMIC:
+  case RID_DEPENDENT_PTR:
 	  return true;
 	default:
 	  return false;
@@ -9147,6 +9149,7 @@ c_parser_objc_selector (c_parser *parser)
     case RID_VOID:
     case RID_BOOL:
     case RID_ATOMIC:
+    case RID_DEPENDENT_PTR:
     case RID_AUTO_TYPE:
     case RID_INT_N_0:
     case RID_INT_N_1:
@@ -10118,7 +10121,6 @@ c_parser_omp_variable_list (c_parser *parser,
 	 && c_parser_peek_token (parser)->id_kind == C_ID_ID)
     {
       tree t = lookup_name (c_parser_peek_token (parser)->value);
-
       if (t == NULL_TREE)
 	{
 	  undeclared_variable (c_parser_peek_token (parser)->location,
